@@ -58,7 +58,7 @@ const getServer = () => {
           });
         }
         catch (error) {
-          console.error("Error sending notification:", error);
+          console.error(error);
         }
         // Wait for the specified interval
         await sleep(interval);
@@ -107,7 +107,7 @@ app.use(express.json());
 
 // Add request logging middleware
 app.use((req: Request, res: Response, next) => {
-  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  console.log(`${req.method} ${req.url}`, 'Request Logging');
   next();
 });
 
@@ -120,12 +120,12 @@ app.post('/mcp', async (req: Request, res: Response) => {
     await server.connect(transport);
     await transport.handleRequest(req, res, req.body);
     res.on('close', () => {
-      console.log('Request closed');
+      console.log('Request closed', 'MCP POST /mcp');
       transport.close();
       server.close();
     });
   } catch (error) {
-    console.error('Error handling MCP request:', error);
+    console.error(error as Error, 'MCP POST /mcp - handleRequest');
     if (!res.headersSent) {
       res.status(500).json({
         jsonrpc: '2.0',
@@ -140,7 +140,7 @@ app.post('/mcp', async (req: Request, res: Response) => {
 });
 
 app.get('/mcp', async (req: Request, res: Response) => {
-  console.log('Received GET MCP request');
+  console.log('Received GET MCP request', 'MCP GET /mcp');
   res.writeHead(405).end(JSON.stringify({
     jsonrpc: "2.0",
     error: {
@@ -153,7 +153,7 @@ app.get('/mcp', async (req: Request, res: Response) => {
 
 // Canary test endpoint
 app.get('/health', async (req: Request, res: Response) => {
-  console.log('Received health check request');
+  console.log('Received health check request', 'GET /health');
   res.status(200).json({
     status: "success",
     message: "MCP server is running",
@@ -163,7 +163,7 @@ app.get('/health', async (req: Request, res: Response) => {
 });
 
 app.delete('/mcp', async (req: Request, res: Response) => {
-  console.log('Received DELETE MCP request');
+  console.log('Received DELETE MCP request', 'MCP DELETE /mcp');
   res.writeHead(405).end(JSON.stringify({
     jsonrpc: "2.0",
     error: {
@@ -174,11 +174,4 @@ app.delete('/mcp', async (req: Request, res: Response) => {
   }));
 });
 
-
-
-
-// Start the server
-const PORT = 3567;
-app.listen(PORT, () => {
-  console.log(`MCP Stateless Streamable HTTP Server listening on port ${PORT}`);
-});
+export default app;

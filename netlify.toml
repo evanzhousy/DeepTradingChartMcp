@@ -20,8 +20,8 @@
 
 [functions]
   node_bundler = "esbuild"
-  included_files = ["dist/**"]
 
 [functions."server"]
+  included_files = ["dist/**"] # Moved from global [functions] for specificity
   # This ensures that the server function is built correctly
   # and can access the compiled JS files from the main build.
