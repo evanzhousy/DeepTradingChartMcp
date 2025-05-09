@@ -1,0 +1,27 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[dev]
+  command = "npm run dev"
+  port = 8888
+  targetPort = 3000 # Standard port for local dev server, will be proxied by Netlify CLI
+
+[[redirects]]
+  from = "/mcp/*"
+  to = "/.netlify/functions/server"
+  status = 200
+
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/server/health"
+  status = 200
+
+[functions]
+  node_bundler = "esbuild"
+  included_files = ["dist/**"]
+
+[functions."server"]
+  # This ensures that the server function is built correctly
+  # and can access the compiled JS files from the main build.
