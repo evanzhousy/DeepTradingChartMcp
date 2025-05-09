@@ -16,7 +16,8 @@
     },
     "scripts": {
         "dev": "netlify dev",
-        "build": "tsc"
+        "build": "tsc",
+        "start:express": "npm run build && node dist/local-express-server.js"
     },
     "devDependencies": {
         "typescript": "^5.4.5"
