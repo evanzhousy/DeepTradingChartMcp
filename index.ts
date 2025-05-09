@@ -1,4 +1,5 @@
 import express, { Request, Response } from 'express';
+import cors from 'cors';
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/streamableHttp.js";
 import { z } from 'zod';
@@ -94,7 +95,21 @@ const getServer = () => {
 }
 
 const app = express();
+
+// Enable CORS for all routes
+app.use(cors({
+  origin: '*',  // In production, you should restrict this to specific origins
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
+
+// Add request logging middleware
+app.use((req: Request, res: Response, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.url}`);
+  next();
+});
 
 app.post('/mcp', async (req: Request, res: Response) => {
   const server = getServer();
