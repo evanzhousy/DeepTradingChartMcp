@@ -1,27 +1,12 @@
 [build]
-  command = "npm run build"
-  publish = "dist"
-  functions = "netlify/functions"
+  publish = "public"
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF ."
 
 [dev]
-  command = "npm run dev"
-  port = 8888
-  targetPort = 3000 # Standard port for local dev server, will be proxied by Netlify CLI
+  publish = "public"
 
 [[redirects]]
-  from = "/mcp/*"
-  to = "/.netlify/functions/server"
+  force = true
+  from = "/mcp"
   status = 200
-
-[[redirects]]
-  from = "/health"
-  to = "/.netlify/functions/server/health"
-  status = 200
-
-[functions]
-  node_bundler = "esbuild"
-
-[functions."server"]
-  included_files = ["dist/**"] # Moved from global [functions] for specificity
-  # This ensures that the server function is built correctly
-  # and can access the compiled JS files from the main build.
+  to = "/.netlify/functions/express-mcp-server"
