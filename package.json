@@ -15,6 +15,10 @@
         "zod": "^3.24.3"
     },
     "scripts": {
-        "dev": "netlify dev"
+        "dev": "netlify dev",
+        "build": "tsc"
+    },
+    "devDependencies": {
+        "typescript": "^5.4.5"
     }
 }

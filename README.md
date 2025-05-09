@@ -31,7 +31,7 @@ URL: `https://deeptradingchartmcp.netlify.app/`
       "command": "npx",
       "args": [
         "mcp-remote@next",
-        "http://localhost:3000/mcp"
+        "http://localhost:8888/mcp"
       ]
     }
   }
