@@ -56,7 +56,7 @@ Verify all imported components and utilities exist in your project
 
 # 要创建的 Tools
 ## Tradingview Chart
-- 说明：当用户输入"/chart"的时候，获取给定股票的 chart 图，以HTML代码的形式返回，以便调用者嵌入网页进行展示
+- 说明：当用户想要看到某个股票的 K 线图，或者输入"/chart"的时候，获取给定股票的 chart 图，以HTML代码的形式返回，以便调用者嵌入网页进行展示
 - 工具名称：“get_tradingview_chart”
 - 输入参数
   - 股票名称缩写(必需)
@@ -87,7 +87,7 @@ Verify all imported components and utilities exist in your project
 
 
 ## Tradingview heatmap
-- 说明：当用户输入"\heatmap",生成 tradingview 的 heatmap 热力图
+- 说明：当用户想了解某个市场的 heatmap，或者输入"/heatmap",生成 tradingview 的 heatmap 热力图
 - 工具名称：“get_heatmap”
 - 输入参数
   - data source (必须)
@@ -121,3 +121,85 @@ Verify all imported components and utilities exist in your project
 <!-- TradingView Widget END -->
 ```
 
+# Tradingview Screener
+- 说明：当用户想了解某个市场的股票的行情详细信息列表，或者输入“/screener”，生成 tradingview 的 screener 图，显示股票的行情详细信息列表
+- 工具名称：“get_screener”
+- 输入参数
+  - market (必须)
+- 输出： tradingview widget 的 html 代码
+- 参考如下的 tradingview widget 的 html 代码
+```html
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js" async>
+  {
+  "width": "100%",
+  "height": 550,
+  "defaultColumn": "overview",
+  "defaultScreen": "general",
+  "market": "forex",
+  "showToolbar": true,
+  "colorTheme": "dark",
+  "locale": "en"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+```
+
+# Tradingview news
+- 说明：当用户想要看到某个市场的新闻，或者输入“/news”，生成 tradingview 的 news 图，显示相关的财经新闻列表
+- 工具名称：“get_news”
+- 输入参数
+  - market (必须)，例如 stock，crypto
+- 输出： tradingview widget 的 html 代码
+- 参考如下的 tradingview widget 的 html 代码
+```html
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js" async>
+  {
+  "feedMode": "market",
+  "isTransparent": false,
+  "displayMode": "regular",
+  "width": 400,
+  "height": 550,
+  "colorTheme": "dark",
+  "locale": "en",
+  "market": "stock"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+```
+
+# Tradingview Calendar
+- 说明：当用户想要看到指定国家市场的重要事件，或者输入“/calendar”，生成 tradingview 的 Calendar 图，显示指定市场的重要事件时间
+- 工具名称：“get_calendar”
+- 输入参数
+  - countryFilter (必须，可以多选）
+- 输出： tradingview widget 的 html 代码
+- 参考如下的 tradingview widget 的 html 代码
+```html
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-events.js" async>
+  {
+  "colorTheme": "dark",
+  "isTransparent": false,
+  "width": "400",
+  "height": "550",
+  "locale": "en",
+  "importanceFilter": "-1,0,1",
+  "countryFilter": "us,ca,cn,jp,hk"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
+```
