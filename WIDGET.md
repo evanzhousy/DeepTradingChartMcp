@@ -203,3 +203,27 @@ Verify all imported components and utilities exist in your project
 </div>
 <!-- TradingView Widget END -->
 ```
+
+# DeepTradingChart
+- 说明：当用户输入“/dtchart”，针对特定的股票，生成包括了走势图、新闻、基本面分析等等的报告
+- 工具名称：“get_deeptradingchart”
+- 输入参数：股票代码（必需）
+- 输出：返回 prompt，大模型按照下述步骤执行，包括调用其他 MCP 服务
+```
+#严格按照如下步骤创建报表，不要忽略任何步骤
+步骤1:  通过 exa mcp 获得{{股票代码}}的相关 新闻, 社交新闻等
+步骤2: 通过 longport-mcp 获得 {{股票代码}}的相关k线数据和公司基本面数据
+步骤3: 请根据我输入的股票代码{{股票代码}} 以及上面获得的数据, 生成一个html动态页面
+#格式要求是:
+1. 使用bento grid分割的视觉设计, 纯黑色底配合{{股票代码}}的主题色作为高亮,
+2. 强调超大字体或数字突出核心要点, 画面中有超大视觉元素强调重点, 与小元素的比例形成反差
+3. 中英文混用, 中文大字体粗体, 英文小字作为点缀
+4. 简洁的勾线图形作为数据可视化或者配图元素
+5. 运用高亮色自身透明度渐变制造科技感, 但是不同高亮色不要互相渐变
+6. 模仿apple官网的动效, 向下滚动鼠标配合动效
+7.  数据可以引用tradingflow widget, 并且引用cdn 依赖库
+8. 使用framer motion(通过cdn引入)
+9. 使用HTML5, TailwindCSS 3.0+ (通过CDN引入) 和必要的Javascript
+10. 使用专业的图标库如 Font Awesome或 Material Icon (通过CDN引入) 
+11. 避免使用emoji作为主要图表
+```

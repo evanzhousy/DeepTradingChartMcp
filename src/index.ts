@@ -14,6 +14,7 @@ import { TradingviewHeatmapTool } from "./tools/tradingview-heatmap.js";
 import { TradingviewScreenerTool } from "./tools/tradingview-screener.js";
 import { TradingviewNewsTool } from "./tools/tradingview-news.js";
 import { TradingviewCalendarTool } from "./tools/tradingview-calendar.js";
+import { DeepTradingChartTool } from "./tools/deeptradingchart.js";
 
 setupJsonConsole();
 
@@ -33,6 +34,7 @@ new TradingviewHeatmapTool().register(server);
 new TradingviewScreenerTool().register(server);
 new TradingviewNewsTool().register(server);
 new TradingviewCalendarTool().register(server);
+new DeepTradingChartTool().register(server);
 
 async function runServer() {
   const transport = new StdioServerTransport();
