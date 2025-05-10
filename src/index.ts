@@ -9,6 +9,12 @@ import { CreateUiTool } from "./tools/create-ui.js";
 import { FetchUiTool } from "./tools/fetch-ui.js";
 import { LogoSearchTool } from "./tools/logo-search.js";
 import { RefineUiTool } from "./tools/refine-ui.js";
+import { TradingviewChartTool } from "./tools/tradingview-chart.js";
+import { TradingviewHeatmapTool } from "./tools/tradingview-heatmap.js";
+import { TradingviewScreenerTool } from "./tools/tradingview-screener.js";
+import { TradingviewNewsTool } from "./tools/tradingview-news.js";
+import { TradingviewCalendarTool } from "./tools/tradingview-calendar.js";
+import { DeepTradingChartTool } from "./tools/deeptradingchart.js";
 
 setupJsonConsole();
 
@@ -23,6 +29,12 @@ new CreateUiTool().register(server);
 new LogoSearchTool().register(server);
 new FetchUiTool().register(server);
 new RefineUiTool().register(server);
+new TradingviewChartTool().register(server);
+new TradingviewHeatmapTool().register(server);
+new TradingviewScreenerTool().register(server);
+new TradingviewNewsTool().register(server);
+new TradingviewCalendarTool().register(server);
+new DeepTradingChartTool().register(server);
 
 async function runServer() {
   const transport = new StdioServerTransport();
